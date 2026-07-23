@@ -1,0 +1,213 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "6dcf3de4",
+   "metadata": {
+    "papermill": {
+     "duration": 0.002667,
+     "end_time": "2026-07-23T09:16:31.635238+00:00",
+     "exception": false,
+     "start_time": "2026-07-23T09:16:31.632571+00:00",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "7e8c58dd",
+   "metadata": {
+    "papermill": {
+     "duration": 0.001202,
+     "end_time": "2026-07-23T09:16:31.637983+00:00",
+     "exception": false,
+     "start_time": "2026-07-23T09:16:31.636781+00:00",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "254d963f",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-07-23T09:16:31.643130Z",
+     "iopub.status.busy": "2026-07-23T09:16:31.642106Z",
+     "iopub.status.idle": "2026-07-23T09:16:34.902728Z",
+     "shell.execute_reply": "2026-07-23T09:16:34.901554Z"
+    },
+    "papermill": {
+     "duration": 3.265658,
+     "end_time": "2026-07-23T09:16:34.904906+00:00",
+     "exception": false,
+     "start_time": "2026-07-23T09:16:31.639248+00:00",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Shape ofthe dataset: (150, 6)\n",
+      "\n",
+      "first5Rows:\n",
+      "   Id  SepalLengthCm  SepalWidthCm  PetalLengthCm  PetalWidthCm      Species\n",
+      "0   1            5.1           3.5            1.4           0.2  Iris-setosa\n",
+      "1   2            4.9           3.0            1.4           0.2  Iris-setosa\n",
+      "2   3            4.7           3.2            1.3           0.2  Iris-setosa\n",
+      "3   4            4.6           3.1            1.5           0.2  Iris-setosa\n",
+      "4   5            5.0           3.6            1.4           0.2  Iris-setosa\n",
+      "\n",
+      "Predicted Species:\n",
+      "['Iris-versicolor' 'Iris-setosa' 'Iris-virginica' 'Iris-versicolor'\n",
+      " 'Iris-versicolor' 'Iris-setosa' 'Iris-versicolor' 'Iris-virginica'\n",
+      " 'Iris-versicolor' 'Iris-versicolor' 'Iris-virginica' 'Iris-setosa'\n",
+      " 'Iris-setosa' 'Iris-setosa' 'Iris-setosa' 'Iris-versicolor'\n",
+      " 'Iris-virginica' 'Iris-versicolor' 'Iris-versicolor' 'Iris-virginica'\n",
+      " 'Iris-setosa' 'Iris-virginica' 'Iris-setosa' 'Iris-virginica'\n",
+      " 'Iris-virginica' 'Iris-virginica' 'Iris-virginica' 'Iris-virginica'\n",
+      " 'Iris-setosa' 'Iris-setosa']\n",
+      "\n",
+      "Actual Species:\n",
+      "['Iris-versicolor' 'Iris-setosa' 'Iris-virginica' 'Iris-versicolor'\n",
+      " 'Iris-versicolor' 'Iris-setosa' 'Iris-versicolor' 'Iris-virginica'\n",
+      " 'Iris-versicolor' 'Iris-versicolor' 'Iris-virginica' 'Iris-setosa'\n",
+      " 'Iris-setosa' 'Iris-setosa' 'Iris-setosa' 'Iris-versicolor'\n",
+      " 'Iris-virginica' 'Iris-versicolor' 'Iris-versicolor' 'Iris-virginica'\n",
+      " 'Iris-setosa' 'Iris-virginica' 'Iris-setosa' 'Iris-virginica'\n",
+      " 'Iris-virginica' 'Iris-virginica' 'Iris-virginica' 'Iris-virginica'\n",
+      " 'Iris-setosa' 'Iris-setosa']\n",
+      "\n",
+      "Accuracy: 100.0 %\n",
+      "\n",
+      "Confusion Matrix:\n",
+      "[[10  0  0]\n",
+      " [ 0  9  0]\n",
+      " [ 0  0 11]]\n",
+      "\n",
+      "Classifiication Report:\n",
+      "                 precision    recall  f1-score   support\n",
+      "\n",
+      "    Iris-setosa       1.00      1.00      1.00        10\n",
+      "Iris-versicolor       1.00      1.00      1.00         9\n",
+      " Iris-virginica       1.00      1.00      1.00        11\n",
+      "\n",
+      "       accuracy                           1.00        30\n",
+      "      macro avg       1.00      1.00      1.00        30\n",
+      "   weighted avg       1.00      1.00      1.00        30\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "import pandas as pd \n",
+    "from sklearn.model_selection import train_test_split\n",
+    "from sklearn.neighbors import KNeighborsClassifier\n",
+    "from sklearn.metrics import accuracy_score, classification_report, confusion_matrix\n",
+    "\n",
+    "path =  \"/kaggle/input/datasets/organizations/uciml/iris/Iris.csv\"\n",
+    "iris = pd.read_csv(path)\n",
+    "\n",
+    "print(\"Shape ofthe dataset:\", iris.shape)\n",
+    "print(\"\\nfirst5Rows:\")\n",
+    "print(iris.head())\n",
+    "X =iris.iloc[:,1:5]\n",
+    "y = iris[\"Species\"]\n",
+    "\n",
+    "X_train, X_test, y_train, y_test = train_test_split(\n",
+    "    X,y,test_size=0.2,random_state=42\n",
+    ")\n",
+    "knn = KNeighborsClassifier(n_neighbors=3)\n",
+    "\n",
+    "knn.fit(X_train,y_train)\n",
+    "\n",
+    "y_pred = knn.predict(X_test)\n",
+    "\n",
+    "print(\"\\nPredicted Species:\")\n",
+    "print(y_pred)\n",
+    "\n",
+    "print(\"\\nActual Species:\")\n",
+    "print(y_test.values)\n",
+    "\n",
+    "accuracy = accuracy_score(y_test,y_pred)\n",
+    "print(\"\\nAccuracy:\",accuracy*100,\"%\")\n",
+    "\n",
+    "print(\"\\nConfusion Matrix:\")\n",
+    "print(confusion_matrix(y_test,y_pred))\n",
+    "\n",
+    "print(\"\\nClassifiication Report:\")\n",
+    "print(classification_report(y_test,y_pred))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "cd086fe2",
+   "metadata": {
+    "papermill": {
+     "duration": 0.001309,
+     "end_time": "2026-07-23T09:16:34.907730+00:00",
+     "exception": false,
+     "start_time": "2026-07-23T09:16:34.906421+00:00",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kaggle": {
+   "accelerator": "none",
+   "dataSources": [],
+   "dockerImageVersionId": 28755,
+   "isGpuEnabled": false,
+   "isInternetEnabled": false,
+   "language": "python",
+   "sourceType": "notebook"
+  },
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.13"
+  },
+  "papermill": {
+   "default_parameters": {},
+   "duration": 7.094928,
+   "end_time": "2026-07-23T09:16:35.630522+00:00",
+   "environment_variables": {},
+   "exception": null,
+   "input_path": "__notebook__.ipynb",
+   "output_path": "__notebook__.ipynb",
+   "parameters": {},
+   "start_time": "2026-07-23T09:16:28.535594+00:00",
+   "version": "2.7.0"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
